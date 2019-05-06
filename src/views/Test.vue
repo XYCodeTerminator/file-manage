@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <XTreeView :treeArray="treeArray" />
+    <XTreeView :treeArray="treeArray" :isOpenAll="true" />
   </div>
 </template>
 
@@ -13,23 +13,32 @@ var treeArray = [
     name: 'folder0',
     children: [
       {
-        name: 'folder1',
+        name: 'folder0-1',
+        isOpen: true,
         children: [
-          { name: 'file1-0' },
-          { name: 'file1-1' }
+          { name: 'file0-1-0' },
+          { name: 'file0-1-1' }
         ]
       },
       { name: 'file2' },
       { name: 'file3' },
       {
-        name: 'folder2',
+        name: 'folder0-2',
         children: [
-          { name: 'file2-0' },
-          { name: 'file2-1' }
+          { name: 'file0-2-0' },
+          { name: 'file0-2-1' }
         ]
       }
     ]
-  }
+  },
+  {
+    name: 'folder1',
+    children: [
+      { name: 'file1-0' },
+      { name: 'file1-1' }
+    ]
+  },
+  { name: 'file3'}
 ]
 export default {
   data () {

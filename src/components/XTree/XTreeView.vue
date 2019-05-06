@@ -9,8 +9,10 @@
     <template v-if="treeArray && treeArray.length>0">
       <XTreeItem
         v-for="(item, i) in treeArray" 
-        :key="i" :item="item" />
-      </template>
+        :key="i" :item="item" :isOpenAll="isOpenAll" 
+        :icon="item.icon" 
+        @select="select"/>
+    </template>
   </div>
 </template>
 
@@ -23,30 +25,20 @@ export default {
   },
   props: {
     // treeData: Object
-    treeArray: Array
+    treeArray: Array,
+    isOpenAll: false
   },
   data: function () {
     return {
-      isOpen: false
+      
     }
   },
   computed: {
-    isFolder: function () {
-      return this.item.children &&
-        this.item.children.length
-    }
   },
   methods: {
-    toggle: function () {
-      if (this.isFolder) {
-        this.isOpen = !this.isOpen
-      }
-    },
-    makeFolder: function () {
-      if (!this.isFolder) {
-      	this.$emit('make-folder', this.item)
-        this.isOpen = true
-      }
+    select (item) {
+      // console.log('***', item)
+      this.$emit('select', item)
     }
   }
 }

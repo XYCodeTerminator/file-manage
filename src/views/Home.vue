@@ -10,27 +10,24 @@
         <div class="user-item">用户1</div>
         <div class="user-item">用户2</div>
         <div class="user-item">用户3</div>
-        <div class="user-item">用户1</div>
-        <div class="user-item">用户2</div>
-        <div class="user-item">用户3</div>
-        <div class="user-item">用户1</div>
-        <div class="user-item">用户2</div>
-        <div class="user-item">用户3</div>
-        <div class="user-item">用户1</div>
-        <div class="user-item">用户2</div>
-        <div class="user-item">用户3</div>
+        <div class="user-item">用户4</div>
       </div>
     </div>
     <div class="container">
       <div class="header">
         <div class="current-user">用户1</div>
-        <button class="sign-out" @click="signOut"></button>
+        <!-- <button class="sign-out" @click="signOut"></button> -->
       </div>
       <div class="body">
         <div class="toolbar"></div>
         <div class="file-container">
-          <div class="file-left"></div>
-          <div class="file-right"></div>
+          <div class="file-left">
+            <div class="file-title">文件夹树</div>
+            <x-tree-view :treeArray="directoryArray" :isOpenAll="true" @select="handleOnSelect" />
+          </div>
+          <div class="file-right">
+            <div class="file-title">文件列表</div>
+          </div>
         </div>
       </div>
     </div>
@@ -38,14 +35,16 @@
 </template>
 
 <script>
-
+import XTreeView from '@/components/XTree'
+import {directoryArray} from './testData.js'
 export default {
   name: 'home',
   components: {
+    XTreeView
   },
   data () {
     return {
-
+      directoryArray
     }
   },
   methods: {
@@ -55,9 +54,12 @@ export default {
     deleteUser () {
       alert('删除用户')
     },
-    signOut () {
-      alert('登出')
+    handleOnSelect (item) {
+      console.log('item: ', item)
     }
+    // signOut () {
+    //   alert('登出')
+    // }
   }
 }
 </script>
@@ -69,7 +71,7 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     .left {
-      flex: 0 0 200px;
+      flex: 0 0 300px;
       background-color: #fff;
       .left-title {
         // background: #87d068;
@@ -79,10 +81,11 @@ export default {
         align-items: center;
         box-sizing: border-box;
         padding: 15px;
-        height: 64px;
+        height: 100px;
         width: 100%;
         text-align: center;
-        font: 20px/1 simhei serif;
+        font: 28px/1 simhei serif;
+        font-weight: 500;
         color: #0288D1;
         button {
           outline: none;
@@ -90,38 +93,38 @@ export default {
           cursor: pointer;
         }
         .btn-add {
-          width: 25px;
-          height: 25px;
-          background: url(../assets/images/add.svg) no-repeat;
+          width: 2.6em;
+          height: 2.6em;
+          background: url(../assets/images/add_user.svg) no-repeat;
           background-size: cover;
         }
         .btn-delete {
-          width: 30px;
-          height: 30px;
-          background: url(../assets/images/delete.svg) no-repeat;
+          width: 2.6em;
+          height: 2.6em;
+          background: url(../assets/images/delete_user.svg) no-repeat;
           background-size: cover;
         }
       }
       .user-list { 
         overflow-y: auto;
-        height: calc(100% - 64px);
+        height: calc(100% - 100px);
         .user-item {
-          width: 130px;
-          height: 60px;
+          width: 80%;
+          height: 80px;
           margin: 0 auto;
           text-align: center;
-          font: 24px/60px serif;
+          font: 30px/80px serif;
           font-weight: bold;
           border-radius: 5px;
           color: #fff;
           background-color: #ccc;
-          margin: 15px auto;
+          margin: 20px auto;
           cursor: pointer;
           box-shadow: -2px 2px 4px 0 rgba(0,0,0,0.2);
           transition: transform .3s;
           &:hover {
             box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
-            transform: scale(1.1) translate3d(6px, 0px, 20px);
+            transform: scale(1.1) translate3d(10px, 0px, 20px);
           }
           &:nth-of-type(1) {
             background-color: #87d068;
@@ -133,13 +136,13 @@ export default {
       flex: 1 1 auto;
       height: 100%;
       .header {
-        height: 64px;
+        height: 100px;
         background: #fff;
         position: relative;
         .current-user {
           width: 200px;
           height: 100%;
-          font: 30px/64px simhei serif;
+          font: 36px/100px simhei serif;
           text-align: center;
           margin: 0 auto;
           font-weight: 700;
@@ -163,11 +166,37 @@ export default {
         }
       }
       .body {
-        height: calc(100% - 64px);
+        height: calc(100% - 100px);
         .file-container {
+          box-sizing: border-box;
+          padding: 10px;
           height: 100%;
-
-          background-color: #0288D1;
+          display: flex;
+          flex-flow: row nowrap;
+          .file-left {
+            height: 100%;
+            box-sizing: border-box;
+            border-right: 1px dashed #03A9F4;
+            width: 50%;
+            .file-title {
+              padding: 5px;
+              margin: 0 auto;
+              text-align: center;
+              color: #FF5722;
+              font: 24px/1 simhei serif;
+            }
+          }
+          .file-right {
+            box-sizing: border-box;
+            width: 50%;
+            .file-title {
+              padding: 5px;
+              color: #FF5722;
+              margin: 0 auto;
+              text-align: center;
+              font: 24px/1 simhei serif;
+            }
+          }
         }
       }
     }
