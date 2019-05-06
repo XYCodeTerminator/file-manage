@@ -10,8 +10,6 @@ const directoryArray = [
           { name: 'folder0-1-1', icon: require('../assets/images/folder_close.svg') }
         ]
       },
-      { name: 'folder2' },
-      { name: 'folder3' },
       {
         name: 'folder0-2',
         children: [

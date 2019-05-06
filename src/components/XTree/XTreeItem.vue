@@ -2,18 +2,19 @@
   <div class="tree-item">
     <!-- <XTreeView v-if="isFolder" :treeData="item" />
     <div v-else>{{item.name}}</div> -->
-    <div class="item-content">
+    <div class="item-content" :class="{arrow: isFolder, 'arrow-down': isOpen}">
       <img 
         v-if="cIcon" 
         class="icon" :src="cIcon" 
         alt="tree-icon"
         @click="toggle" >
-      <span @click="itemClick(item, $event)">{{item.name}}</span>
+      <span class="txt" @click="itemClick(item, $event)">{{item.name}}</span>
     </div>
     <XTreeView 
       v-if="isFolder" v-show="isOpen" 
       :isOpenAll="isOpenAll"
-      :treeArray="item.children" />
+      :treeArray="item.children"
+      @select="select" />
   </div>
 </template>
 
@@ -64,10 +65,9 @@ export default {
       this.isOpen = !this.isOpen
     },
     itemClick (item, event) {
-      // console.log(item)
+      // console.log('XTreeItem:', item)
+      this.isOpen = !this.isOpen
       this.$emit('select', item)
-      // this.isSelected = !this.isSelected
-      // var treeItemContents = document.getElementsByClassName('item-content')
       var currentItemContent = event.target.parentElement
       for (const item of this.treeItemContents) {
         if (item == currentItemContent) {
@@ -76,6 +76,9 @@ export default {
           item.style.backgroundColor = 'transparent'
         }
       }
+    },
+    select (item) {
+      this.$emit('select', item)
     }
   }
 }
@@ -91,11 +94,26 @@ export default {
       flex-flow: row nowrap;
       align-items: center;
       font: 20px/1.5 sans-serif;
+      user-select: none;
+      &.arrow::before {
+        content: "\25B6";
+        display: inline-block;
+        margin-right: 0.3em;
+        font-size: 0.7em;
+        color: #777;
+        cursor: pointer;
+      }
+      &.arrow-down::before {
+        transform: rotate(90deg);
+      }
       .icon {
-        // display: inline-block;
+        flex: 0 0 auto;
         width: 1.3em;
         height: 1.3em;
         cursor: pointer;
+      }
+      .txt {
+        flex: 1 1 auto;
       }
     }
   }

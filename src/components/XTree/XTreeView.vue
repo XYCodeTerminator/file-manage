@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     select (item) {
-      // console.log('***', item)
+      // console.log('XTreeView:', item)
       this.$emit('select', item)
     }
   }
