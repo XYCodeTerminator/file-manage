@@ -7,10 +7,10 @@
       :key="i" :item="item" />
     </template> -->
     <template v-if="treeArray && treeArray.length>0">
-      <XTreeItem
+      <XTreeItem ref="treeItem"
         v-for="(item, i) in treeArray" 
         :key="i" :item="item" :isOpenAll="isOpenAll" 
-        :icon="item.icon" 
+        :icon="item.icon"
         @select="select"/>
     </template>
   </div>
@@ -27,7 +27,14 @@ export default {
     // treeData: Object
     treeArray: Array,
     isOpenAll: false,
-    treeViewStyle: Object
+    treeViewStyle: Object,
+    // selected: Object
+    // selected: {
+    //   type: Object,
+    //   default: function () {
+    //     return {}
+    //   }
+    // }
   },
   data: function () {
     return {

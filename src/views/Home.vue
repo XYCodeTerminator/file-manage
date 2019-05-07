@@ -100,7 +100,7 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     .left {
-      flex: 0 0 300px;
+      flex: 0 0 280px;
       background-color: #fff;
       .left-title {
         // background: #87d068;
@@ -138,7 +138,7 @@ export default {
         overflow-y: auto;
         height: calc(100% - 100px);
         .user-item {
-          width: 80%;
+          width: 70%;
           height: 80px;
           margin: 0 auto;
           text-align: center;

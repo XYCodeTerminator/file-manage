@@ -2,7 +2,13 @@
   <div class="tree-item">
     <!-- <XTreeView v-if="isFolder" :treeData="item" />
     <div v-else>{{item.name}}</div> -->
-    <div class="item-content" :class="{arrow: isFolder&&hasChildren, 'arrow-down': isOpen&&hasChildren}">
+    <div class="item-content" 
+      :class="{
+          arrow: isFolder&&hasChildren, 
+          'arrow-down': isOpen&&hasChildren,
+          selected: isSelected
+      }"
+    >
       <img 
         v-if="cIcon" 
         class="icon" :src="cIcon" 
@@ -29,14 +35,14 @@ export default {
   data () {
     return {
       isOpen: this.item.isOpen || this.isOpenAll,
-      isSelected: false
+      isSelected: this.item.isSelected
     }
   },
   mounted () {
-    this.treeItemContents = document.getElementsByClassName('item-content')
+    this.treeItemContentDOMS = document.getElementsByClassName('item-content')
   },
   beforeDestroy () {
-    this.treeItemContents = null
+    this.treeItemContentDOMS = null
   },
   props: {
     item: Object,
@@ -66,11 +72,12 @@ export default {
       this.isOpen = !this.isOpen
       this.$emit('select', item)
       var currentItemContent = event.target.parentElement
-      for (const item of this.treeItemContents) {
-        if (item == currentItemContent) {
-          item.style.backgroundColor = '#e0e0e0'
+      for (let itemContentDOM of this.treeItemContentDOMS) {
+        if (itemContentDOM == currentItemContent) {
+          // debugger
+          itemContentDOM.style.backgroundColor = '#e0e0e0'
         } else {
-          item.style.backgroundColor = 'transparent'
+          itemContentDOM.style.backgroundColor = 'transparent'
         }
       }
     },
