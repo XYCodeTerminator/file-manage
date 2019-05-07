@@ -2,7 +2,7 @@
   <div class="tree-item">
     <!-- <XTreeView v-if="isFolder" :treeData="item" />
     <div v-else>{{item.name}}</div> -->
-    <div class="item-content" :class="{arrow: isFolder, 'arrow-down': isOpen}">
+    <div class="item-content" :class="{arrow: isFolder&&hasChildren, 'arrow-down': isOpen&&hasChildren}">
       <img 
         v-if="cIcon" 
         class="icon" :src="cIcon" 
@@ -29,8 +29,7 @@ export default {
   data () {
     return {
       isOpen: this.item.isOpen || this.isOpenAll,
-      isSelected: false,
-      deSelected: true
+      isSelected: false
     }
   },
   mounted () {
@@ -47,16 +46,14 @@ export default {
   computed: {
     isFolder () {
       // return this.item.children && this.item.children.length > 0
-      return this.item.children
+      return this.item.children || this.item.isFolder
     },
-    cIsOpen: {
-      get: function () {
-        return (this.isOpenAll || this.item.isOpen) && this.isOpen
-      }
+    hasChildren () {
+      return this.item.children && this.item.children.length > 0
     },
     cIcon () {
       return this.isFolder 
-        ? (this.isOpen ? require('./assets/images/folder_open.svg') : require('./assets/images/folder_close.svg'))
+        ? (this.isOpen && this.hasChildren ? require('./assets/images/folder_open.svg') : require('./assets/images/folder_close.svg'))
         : this.icon
     }
   },
@@ -93,14 +90,14 @@ export default {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      font: 20px/1.5 sans-serif;
+      // font: 20px/1.5 sans-serif;
       user-select: none;
       &.arrow::before {
         content: "\25B6";
         display: inline-block;
         margin-right: 0.3em;
         font-size: 0.7em;
-        color: #777;
+        // color: #707070;
         cursor: pointer;
       }
       &.arrow-down::before {

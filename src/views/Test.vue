@@ -1,6 +1,12 @@
 <template>
   <div class="test">
-    <XTreeView :treeArray="treeArray" :isOpenAll="true" />
+    <!-- <XTreeView :treeArray="treeArray" :isOpenAll="true" /> -->
+    <!-- <svg aria-hidden="true">
+      <use :xlink:href="`#-${require('../assets/images/upload.svg')}`" />
+    </svg> -->
+    <svg width="96" height="96">
+      <use xlink:href="../assets/images/upload_disable.svg" width="96" height="96" />
+    </svg>
   </div>
 </template>
 

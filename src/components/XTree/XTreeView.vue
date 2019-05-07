@@ -26,7 +26,8 @@ export default {
   props: {
     // treeData: Object
     treeArray: Array,
-    isOpenAll: false
+    isOpenAll: false,
+    treeViewStyle: Object
   },
   data: function () {
     return {
@@ -45,7 +46,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+  // .tree-view{
+  //   font-size: 25px;
+  //   color: red;
+  // }
 </style>
 
 
