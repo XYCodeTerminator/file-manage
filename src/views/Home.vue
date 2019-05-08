@@ -4,7 +4,7 @@
       <div class="left-title">
         <button class="btn-add" @click="addUser"></button>
         <span>用户列表</span>
-        <button class="btn-delete" @click="deleteUser"></button>
+        <button class="btn-delete" :class="{active: selectedUser}" :disabled="!selectedUser" @click="deleteUser"></button>
       </div>
       <div class="user-list">
         <div v-for="(user, i) in users" :key="i" 
@@ -12,10 +12,20 @@
           {{user.name}}
         </div>
       </div>
+      <x-modal class="user-add-modal" :isVisible="isAddVisible" :position="userModalPosition">
+        <div class="modal-content">
+          <div class="btn-close" @click="addUserCancel">&times;</div>
+          <div class="modal-title">添加用户</div>
+          <input v-model="username" placeholder="请输入用户名" type="text">
+          <div class="btn-ok" @click="addUserOk">确认</div>
+          <div class="btn-cancel" @click="addUserCancel">取消</div>
+        </div>
+      </x-modal>
+
     </div>
     <div class="container">
       <div class="header">
-        <div class="current-user">用户1</div>
+        <div class="current-user">{{this.selectedUser && this.selectedUser.name || '未选择用户'}}</div>
         <button :disabled="!(selectedTreeItem&&selectedUser)" class="upload" :class="{active: selectedTreeItem&&selectedUser}" @click="upload"></button>
       </div>
       <div class="body">
@@ -46,29 +56,46 @@
 
 <script>
 import XTreeView from '@/components/XTree'
+import XModal from '@/components/XModal'
 import {directoryArray, fileArray, users} from './testData.js'
 export default {
   name: 'home',
   components: {
-    XTreeView
+    XTreeView,
+    XModal
   },
   data () {
     return {
       directoryArray,
       users,
       selectedUser: null,
-      selectedTreeItem: null
+      selectedTreeItem: null,
+      isAddVisible: false,
+      username: '',
+      userModalPosition: {}
     }
   },
   mounted () {
     this.userItemsDOM = document.getElementsByClassName('user-item')
   },
   methods: {
-    addUser () {
-      alert('添加用户')
+    addUser (event) {
+      this.userModalPosition.left = event.clientX + 'px'
+      this.userModalPosition.top = event.clientY + 'px'
+      this.isAddVisible = true
+      this.username = ''
+    },
+    addUserOk () {
+      this.isAddVisible = false
+      this.users.push({ name: this.username })
+    },
+    addUserCancel () {
+      this.isAddVisible = false
+      this.username = ''
     },
     deleteUser () {
-      alert('删除用户')
+      const delIndex = this.users.indexOf(this.selectedUser)
+      this.users.splice(delIndex, 1)
     },
     handleOnTreeSelect (item) {
       console.log('item: ', item)
@@ -130,8 +157,12 @@ export default {
         .btn-delete {
           width: 2.6em;
           height: 2.6em;
-          background: url(../assets/images/delete_user.svg) no-repeat;
+          background: url(../assets/images/delete_user_disable.svg) no-repeat;
           background-size: cover;
+          &.active {
+            background: url(../assets/images/delete_user.svg) no-repeat;
+            background-size: cover;
+          }
         }
       }
       .user-list { 
@@ -148,6 +179,7 @@ export default {
           color: #fff;
           background-color: #ccc;
           margin: 20px auto;
+          user-select: none;
           cursor: pointer;
           box-shadow: -2px 2px 4px 0 rgba(0,0,0,0.2);
           transition: transform .3s;
@@ -161,6 +193,68 @@ export default {
             transform: scale(1.1) translate3d(10px, 0px, 20px);
           }
         } 
+      }
+      .user-add-modal {
+        .modal-content {
+          width: 260px;
+          padding: 20px;
+          border-radius: 6px;
+          background: #fff;
+          overflow: hidden;
+          font: 24px/1 sans-serif;
+          position: relative;
+          .btn-close {
+            position: absolute;
+            color: #03A9F4;
+            right: 10px;
+            top: 8px;
+            &:hover {
+              color: #0288D1;
+              cursor: pointer;
+            }
+          }
+          .modal-title {
+            text-align: center;
+            color: #03A9F4;
+            font-weight: 600;
+          }
+          input {
+            box-sizing: border-box;
+            margin-top: 15px;
+            width: 100%;
+            font-size: 18px;
+            height: 2.5em;
+            border: none;
+            outline: none;
+            border: 2px solid #03A9F4;
+            padding-left: 10px;
+            color: #03A9F4;
+            &::-webkit-input-placeholder {
+              color: #7cc3e9;
+            }
+          }
+          .btn-ok,.btn-cancel {
+            margin-top: 10px;
+            display: inline-block;
+            font-size: 16px;
+            padding: 8px 18px;
+            border-radius: 3px;
+            cursor: pointer;
+          }
+          .btn-ok {
+            color: #87d068;
+            &:hover {
+              background: #87d0684d;
+            }
+          }
+          .btn-cancel {
+            margin-left: 10px;
+            color: #F44336;
+            &:hover {
+              background: #F443364d;
+            }
+          }
+        }
       }
     }
     .container {
@@ -229,6 +323,7 @@ export default {
               overflow: auto;
               font: 23px/1.5 sans-serif;
               color: #707070;
+              padding-top: 25px;
             }
           }
           .files-right {

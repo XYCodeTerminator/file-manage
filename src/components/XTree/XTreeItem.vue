@@ -3,18 +3,20 @@
     <!-- <XTreeView v-if="isFolder" :treeData="item" />
     <div v-else>{{item.name}}</div> -->
     <div class="item-content" 
-      :class="{
-          arrow: isFolder&&hasChildren, 
-          'arrow-down': isOpen&&hasChildren,
-          selected: isSelected
-      }"
+      @click="itemClick(item, $event)"
     >
-      <img 
-        v-if="cIcon" 
-        class="icon" :src="cIcon" 
-        alt="tree-icon"
-        @click="toggle" >
-      <span class="txt" @click="itemClick(item, $event)">{{item.name}}</span>
+      <div class="left-icon" @click="toggle"
+        :class="{
+          arrow: isFolder&&hasChildren, 
+          'arrow-down': isOpen&&hasChildren
+        }"
+      >
+        <img 
+          v-if="cIcon" 
+          class="icon-img" :src="cIcon" 
+          alt="tree-icon" >
+      </div>
+      <span class="txt">{{item.name}}</span>
     </div>
     <XTreeView 
       v-if="isFolder" v-show="isOpen" 
@@ -35,7 +37,7 @@ export default {
   data () {
     return {
       isOpen: this.item.isOpen || this.isOpenAll,
-      isSelected: this.item.isSelected
+      selected: null
     }
   },
   mounted () {
@@ -69,17 +71,31 @@ export default {
     },
     itemClick (item, event) {
       // console.log('XTreeItem:', item)
-      this.isOpen = !this.isOpen
-      this.$emit('select', item)
       var currentItemContent = event.target.parentElement
+      this.selected = item
       for (let itemContentDOM of this.treeItemContentDOMS) {
         if (itemContentDOM == currentItemContent) {
           // debugger
-          itemContentDOM.style.backgroundColor = '#e0e0e0'
+          // itemContentDOM.style.backgroundColor = '#e0e0e0'
+          // debugger
+          /**
+           * :class="{
+           *   arrow: isFolder&&hasChildren, 
+           *   'arrow-down': isOpen&&hasChildren
+           * }" 会覆盖 selected 样式
+           */
+          if (itemContentDOM.classList.contains('selected')) {
+            this.selected = null
+          }
+          itemContentDOM.classList.toggle('selected')
         } else {
-          itemContentDOM.style.backgroundColor = 'transparent'
+          // debugger
+          // itemContentDOM.style.backgroundColor = 'transparent'
+          itemContentDOM.classList.remove('selected')
         }
       }
+      // this.isOpen = !this.isOpen
+      this.$emit('select', this.selected)
     },
     select (item) {
       this.$emit('select', item)
@@ -99,22 +115,31 @@ export default {
       align-items: center;
       // font: 20px/1.5 sans-serif;
       user-select: none;
-      &.arrow::before {
-        content: "\25B6";
-        display: inline-block;
-        margin-right: 0.3em;
-        font-size: 0.7em;
-        // color: #707070;
-        cursor: pointer;
+      
+      &.selected {
+        background-color: #e0e0e0;
       }
-      &.arrow-down::before {
-        transform: rotate(90deg);
-      }
-      .icon {
+      .left-icon {
         flex: 0 0 auto;
-        width: 1.3em;
-        height: 1.3em;
-        cursor: pointer;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        &.arrow::before {
+          content: "\25B6";
+          display: inline-block;
+          margin-right: 0.3em;
+          font-size: 0.7em;
+          // color: #707070;
+          cursor: pointer;
+        }
+        &.arrow-down::before {
+          transform: rotate(90deg);
+        }
+        .icon-img {
+          width: 1.3em;
+          height: 1.3em;
+          cursor: pointer;
+        }
       }
       .txt {
         flex: 1 1 auto;

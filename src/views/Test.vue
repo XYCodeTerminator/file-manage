@@ -4,14 +4,18 @@
     <!-- <svg aria-hidden="true">
       <use :xlink:href="`#-${require('../assets/images/upload.svg')}`" />
     </svg> -->
-    <svg width="96" height="96">
+    <!-- <svg width="96" height="96">
       <use xlink:href="../assets/images/upload_disable.svg" width="96" height="96" />
-    </svg>
+    </svg> -->
+    <x-modal :isVisible="true" :position="{left: '100px', top: '200px'}">
+      <div>aaa</div>
+    </x-modal>
   </div>
 </template>
 
 <script>
 import XTreeView from '@/components/XTree'
+import XModal from '@/components/XModal'
 var treeArray = [
   { name: 'file0' },
   { name: 'file1' },
@@ -53,7 +57,8 @@ export default {
     }
   },
   components: {
-    XTreeView
+    XTreeView,
+    XModal
   },
   methods: {
   	makeFolder: function (item) {
@@ -68,4 +73,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+
+</style>
+
 
