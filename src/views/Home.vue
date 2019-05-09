@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <div class="left">
+      
       <div class="left-title">
+        <div class="border-left-top"></div>
+        <div class="border-right-top"></div>
+        <div class="border-left-bottom"></div>
+        <div class="border-right-bottom"></div>
         <button class="btn-add" @click="addUser"></button>
         <span>用户列表</span>
         <button class="btn-delete" :class="{active: selectedUser}" :disabled="!selectedUser" @click="deleteUser"></button>
@@ -9,7 +14,8 @@
       <div class="user-list">
         <div v-for="(user, i) in users" :key="i" 
           class="user-item" @click="handleOnUserSelect(user, $event)">
-          {{user.name}}
+          <!-- <img class="user-icon" src="../assets/images/user.svg" alt="user-icon"> -->
+          <div class="username">{{user.name}}</div>
         </div>
       </div>
       <x-modal class="user-add-modal" :isVisible="isAddVisible" :position="userModalPosition">
@@ -25,24 +31,30 @@
     </div>
     <div class="container">
       <div class="header">
-        <div class="current-user">{{this.selectedUser && this.selectedUser.name || '未选择用户'}}</div>
+        <div class="current-user"><div class="username">{{this.selectedUser && this.selectedUser.name || '未选择用户'}}</div></div>
         <button :disabled="!(selectedTreeItem&&selectedUser)" class="upload" :class="{active: selectedTreeItem&&selectedUser}" @click="upload"></button>
       </div>
       <div class="body">
         <div class="toolbar"></div>
         <div class="files-container">
           <div class="files-left">
-            <div class="left-title">文件夹树</div>
+            <div class="left-title">文件夹</div>
             <div class="left-content">
+              <div class="border-left-top"></div>
+              <div class="border-right-top"></div>
+              <div class="border-left-bottom"></div>
+              <div class="border-right-bottom"></div>
               <x-tree-view :treeArray="directoryArray" 
                 :isOpenAll="true" @select="handleOnTreeSelect" />
             </div>
           </div>
           <div class="files-right">
-            <div class="right-title">
-              <span>文件列表</span>
-            </div>
+            <div class="right-title">文件列表</div>
             <div class="right-content">
+              <div class="border-left-top"></div>
+              <div class="border-right-top"></div>
+              <div class="border-left-bottom"></div>
+              <div class="border-right-bottom"></div>
               <div class="files-list">
                 <div class="list-item"></div>
               </div>
@@ -123,14 +135,21 @@ export default {
 <style lang="less" scoped>
   .home {
     background-color: #f0f2f5;
+    // background-color: #00071a;
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
     .left {
-      flex: 0 0 280px;
+      flex: 0 0 18%;
       background-color: #fff;
+      // background-color: #00104f;
+      box-shadow: 4px 0 10px 0 rgba(0,0,0,0.1);
       .left-title {
         // background: #87d068;
+        box-sizing: border-box;
+        border: solid 1px #03A9F4;
+        background-color: #fff;
+        position: relative;
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-around;
@@ -143,6 +162,7 @@ export default {
         font: 28px/1 simhei serif;
         font-weight: 500;
         color: #0288D1;
+        // box-shadow: 4px 4px 10px 10px #0288D14d inset;
         button {
           outline: none;
           border: none;
@@ -169,27 +189,44 @@ export default {
         overflow-y: auto;
         height: calc(100% - 100px);
         .user-item {
+          box-sizing: border-box;
+          clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
           width: 70%;
-          height: 80px;
-          margin: 0 auto;
+          height: 2.4em;
           text-align: center;
-          font: 30px/80px serif;
+          font: 30px/2.4 serif;
           font-weight: bold;
-          border-radius: 5px;
+          // border-bottom-left-radius: 15px;
+          // border-top-left-radius: 15px;
+          border-left: solid transparent 5px;
           color: #fff;
           background-color: #ccc;
           margin: 20px auto;
           user-select: none;
           cursor: pointer;
-          box-shadow: -2px 2px 4px 0 rgba(0,0,0,0.2);
+          // box-shadow: -2px 2px 4px 0 rgba(0,0,0,0.2);
           transition: transform .3s;
+          // display: flex;
+          // flex-flow: row nowrap;
+          // justify-content: flex-start;
+          // align-items: center;
+          // .user-icon {
+          //   width: 1em;
+          //   height: 1em;
+          //   flex: 0 0 auto;
+          //   display: block;
+          // }
+          // .username {
+          //   flex: 1 1 auto;
+          // }
           &:hover {
-            box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
+            // box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
             transform: scale(1.1) translate3d(10px, 0px, 20px);
+            border-left: solid #03A9F4 5px;
           }
           &.selected {
-            background-color: #87d068;
-            box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
+            background-color: #03A9F4;
+            // box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
             transform: scale(1.1) translate3d(10px, 0px, 20px);
           }
         } 
@@ -261,19 +298,35 @@ export default {
       flex: 1 1 auto;
       height: 100%;
       .header {
+        box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1);
         height: 100px;
         background: #fff;
+        // background-color: #00104f;
         position: relative;
+        // border: solid 1px #03A9F4;
+        border: none;
+        border-left: none;
+        box-sizing: border-box;
         .current-user {
-          width: 200px;
-          height: 100%;
-          font: 36px/100px simhei serif;
-          text-align: center;
+          // box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+          position: absolute;
+          left: 0;
+          right: 0;
           margin: 0 auto;
-          font-weight: 700;
+          background-color: #fff;
+          width: 400px;
+          height: 140%;
+          font: 45px sans-serif;
+          text-align: center;
+          font-weight: 600;
           color: #03A9F4;
-          // float: left;
-          // background: #bfa;
+          clip-path: polygon(0 0, 10% 100%, 90% 100%, 100% 0, 0 0);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-top: solid 3px #03A9F4;
+          border-bottom: solid 6px #03A9F4;
+          box-sizing: border-box;
         }
         .upload {
           width: 40px;
@@ -298,14 +351,15 @@ export default {
         height: calc(100% - 100px);
         .files-container {
           box-sizing: border-box;
-          padding: 10px;
+          padding: 0 20px 20px 20px;
           height: 100%;
           display: flex;
           flex-flow: row nowrap;
           .files-left {
             height: 100%;
             box-sizing: border-box;
-            border-right: 1px dashed #03A9F4;
+            // border-right: 1px dashed #03A9F4;
+            padding: 10px;
             width: 50%;
             display: flex;
             flex-flow: column nowrap;
@@ -316,18 +370,26 @@ export default {
               margin: 0 auto;
               text-align: center;
               color: #03A9F4;
-              font: 24px/1 simhei serif;
+              font: 26px/1 simhei serif;
+              text-shadow: 0.1em 0.1em 0.2em #03A9F4AA;
             }
             .left-content {
+              position: relative;
               flex: 1 1 auto;
               overflow: auto;
               font: 23px/1.5 sans-serif;
               color: #707070;
-              padding-top: 25px;
+              margin-top: 20px;
+              padding: 10px;
+              background-color: #fff;
+              border: solid 1px #03A9F4;
             }
           }
           .files-right {
             box-sizing: border-box;
+            display: flex;
+            flex-flow: column nowrap;
+            padding: 10px;
             width: 50%;
             .right-title {
               position: relative;
@@ -335,14 +397,53 @@ export default {
               color: #03A9F4;
               margin: 0 auto;
               text-align: center;
-              font: 24px/1 simhei serif;
+              font: 26px/1 simhei serif;
+              text-shadow: 0.1em 0.1em 0.2em #03A9F4AA;
             }
             .right-content {
+              position: relative;
               overflow: auto;
+              flex: 1 1 auto;
+              margin-top: 20px;
+              padding: 10px;
+              background-color: #fff;
+              border: solid 1px #03A9F4;
             }
           }
         }
       }
+    }
+    .border-left-top {
+      height: 10px;
+      width: 10px;
+      border-top: #03A9F4 solid 2px;
+      border-left: #03A9F4 solid 2px;
+      position: absolute;
+      left: 0; top: 0;
+    }
+    .border-right-top {
+      height: 10px;
+      width: 10px;
+      border-top: #03A9F4 solid 2px;
+      border-right: #03A9F4 solid 2px;
+      position: absolute;
+      right: 0; top: 0;
+    }
+    .border-left-bottom {
+      height: 10px;
+      width: 10px;
+      border-bottom: #03A9F4 solid 2px;
+      border-left: #03A9F4 solid 2px;
+      position: absolute;
+      left: 0; bottom: 0;
+    }
+    .border-right-bottom {
+      height: 10px;
+      width: 10px;
+      border-bottom: #03A9F4 solid 2px;
+      border-right: #03A9F4 solid 2px;
+      position: absolute;
+      right: 0; bottom: 0;
     }
   }
 </style>
