@@ -6,19 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    .test {
-      background: skyblue;
-      height: 100px;
-      clip-path: polygon(0 0, 0 50px, 300px 50px, 50% 50%, 0 0);
-      cursor: pointer;
-    }
-    html,body {
-      padding: 0;
-      margin: 0;
+    .rect {
+      position: absolute; 
+      top: 20px;
+      left: 20px; 
+      width: 100px; 
+      height: 100px; 
+      /* background: linear-gradient(to left, #f00, #f00) top left no-repeat / 20px 5px,
+                  linear-gradient(to left, #f00, #f00) top right no-repeat / 20px 5px,
+                  linear-gradient(to left, #f00, #f00) bottom left no-repeat / 20px 5px,
+                  linear-gradient(to left, #f00, #f00) bottom right no-repeat / 20px 5px,
+                  linear-gradient(to bottom, #f00, #f00) top left no-repeat / 5px 20px,
+                  linear-gradient(to bottom, #f00, #f00) top right no-repeat / 5px 20px,
+                  linear-gradient(to bottom, #f00, #f00) bottom left no-repeat / 5px 20px,
+                  linear-gradient(to bottom, #f00, #f00) bottom right no-repeat / 5px 20px; */
+    
     }
   </style>
 </head>
 <body>
-  <div class="test"></div>
+  <div class="rect"></div>
 </body>
 </html>

@@ -2,11 +2,7 @@
   <div class="home">
     <div class="left">
       
-      <div class="left-title">
-        <div class="border-left-top"></div>
-        <div class="border-right-top"></div>
-        <div class="border-left-bottom"></div>
-        <div class="border-right-bottom"></div>
+      <div class="left-title border-style">
         <button class="btn-add" @click="addUser"></button>
         <span>用户列表</span>
         <button class="btn-delete" :class="{active: selectedUser}" :disabled="!selectedUser" @click="deleteUser"></button>
@@ -15,7 +11,8 @@
         <div v-for="(user, i) in users" :key="i" 
           class="user-item" @click="handleOnUserSelect(user, $event)">
           <!-- <img class="user-icon" src="../assets/images/user.svg" alt="user-icon"> -->
-          <div class="username">{{user.name}}</div>
+          <!-- <div class="username">{{user.name}}</div> -->
+          {{user.name}}
         </div>
       </div>
       <x-modal class="user-add-modal" :isVisible="isAddVisible" :position="userModalPosition">
@@ -39,22 +36,14 @@
         <div class="files-container">
           <div class="files-left">
             <div class="left-title">文件夹</div>
-            <div class="left-content">
-              <div class="border-left-top"></div>
-              <div class="border-right-top"></div>
-              <div class="border-left-bottom"></div>
-              <div class="border-right-bottom"></div>
+            <div class="left-content border-style">
               <x-tree-view :treeArray="directoryArray" 
                 :isOpenAll="true" @select="handleOnTreeSelect" />
             </div>
           </div>
           <div class="files-right">
             <div class="right-title">文件列表</div>
-            <div class="right-content">
-              <div class="border-left-top"></div>
-              <div class="border-right-top"></div>
-              <div class="border-left-bottom"></div>
-              <div class="border-right-bottom"></div>
+            <div class="right-content border-style">
               <div class="files-list">
                 <div class="list-item"></div>
               </div>
@@ -141,6 +130,7 @@ export default {
     flex-flow: row nowrap;
     .left {
       flex: 0 0 18%;
+      max-width: 280px;
       background-color: #fff;
       // background-color: #00104f;
       box-shadow: 4px 0 10px 0 rgba(0,0,0,0.1);
@@ -156,7 +146,7 @@ export default {
         align-items: center;
         box-sizing: border-box;
         padding: 15px;
-        height: 100px;
+        height: 80px;
         width: 100%;
         text-align: center;
         font: 28px/1 simhei serif;
@@ -187,7 +177,7 @@ export default {
       }
       .user-list { 
         overflow-y: auto;
-        height: calc(100% - 100px);
+        height: calc(100% - 80px);
         .user-item {
           box-sizing: border-box;
           clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
@@ -221,7 +211,7 @@ export default {
           // }
           &:hover {
             // box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
-            transform: scale(1.1) translate3d(10px, 0px, 20px);
+            transform: scale(1.1) translate3d(15px, 0px, 20px);
             border-left: solid #03A9F4 5px;
           }
           &.selected {
@@ -299,7 +289,7 @@ export default {
       height: 100%;
       .header {
         box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1);
-        height: 100px;
+        height: 80px;
         background: #fff;
         // background-color: #00104f;
         position: relative;
@@ -348,7 +338,7 @@ export default {
         }
       }
       .body {
-        height: calc(100% - 100px);
+        height: calc(100% - 80px);
         .files-container {
           box-sizing: border-box;
           padding: 0 20px 20px 20px;
@@ -413,37 +403,16 @@ export default {
         }
       }
     }
-    .border-left-top {
-      height: 10px;
-      width: 10px;
-      border-top: #03A9F4 solid 2px;
-      border-left: #03A9F4 solid 2px;
-      position: absolute;
-      left: 0; top: 0;
-    }
-    .border-right-top {
-      height: 10px;
-      width: 10px;
-      border-top: #03A9F4 solid 2px;
-      border-right: #03A9F4 solid 2px;
-      position: absolute;
-      right: 0; top: 0;
-    }
-    .border-left-bottom {
-      height: 10px;
-      width: 10px;
-      border-bottom: #03A9F4 solid 2px;
-      border-left: #03A9F4 solid 2px;
-      position: absolute;
-      left: 0; bottom: 0;
-    }
-    .border-right-bottom {
-      height: 10px;
-      width: 10px;
-      border-bottom: #03A9F4 solid 2px;
-      border-right: #03A9F4 solid 2px;
-      position: absolute;
-      right: 0; bottom: 0;
+    .border-style {
+      background: linear-gradient(to left, #03A9F4, #03A9F4) top left no-repeat,
+                  linear-gradient(to bottom, #03A9F4, #03A9F4) top left no-repeat,
+                  linear-gradient(to left, #03A9F4, #03A9F4) bottom left no-repeat,
+                  linear-gradient(to bottom, #03A9F4, #03A9F4) bottom left no-repeat,
+                  linear-gradient(to left, #03A9F4, #03A9F4) top right no-repeat,
+                  linear-gradient(to bottom, #03A9F4, #03A9F4) top right no-repeat,
+                  linear-gradient(to left, #03A9F4, #03A9F4) bottom right no-repeat,
+                  linear-gradient(to bottom, #03A9F4, #03A9F4) bottom right no-repeat;
+      background-size: 10px 2px, 2px 10px;
     }
   }
 </style>
