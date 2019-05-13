@@ -6,25 +6,30 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    .rect {
-      position: absolute; 
-      top: 20px;
-      left: 20px; 
-      width: 100px; 
-      height: 100px; 
-      /* background: linear-gradient(to left, #f00, #f00) top left no-repeat / 20px 5px,
-                  linear-gradient(to left, #f00, #f00) top right no-repeat / 20px 5px,
-                  linear-gradient(to left, #f00, #f00) bottom left no-repeat / 20px 5px,
-                  linear-gradient(to left, #f00, #f00) bottom right no-repeat / 20px 5px,
-                  linear-gradient(to bottom, #f00, #f00) top left no-repeat / 5px 20px,
-                  linear-gradient(to bottom, #f00, #f00) top right no-repeat / 5px 20px,
-                  linear-gradient(to bottom, #f00, #f00) bottom left no-repeat / 5px 20px,
-                  linear-gradient(to bottom, #f00, #f00) bottom right no-repeat / 5px 20px; */
-    
+    .container {
+      width: 600px;
+      display: table;
+    }
+    .left,.right {
+      padding: 20px;
+      width: 50%;
+      display: table-cell;
+      background: #bfa;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .text {
+      display: inline-block;
+      text-align: left;
     }
   </style>
 </head>
 <body>
-  <div class="rect"></div>
+  <div class="container">
+    <div class="left"><div class="text">测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1测试1</div></div>
+    <div class="right"><div class="text">测试</div></div>
+    <p>111</p>
+    <p>222</p>
+  </div>
 </body>
 </html>

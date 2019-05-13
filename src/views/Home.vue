@@ -189,24 +189,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  @bg-color: #f0f2f5;
+  @header-color: #fff;
+  @left-color: #fff;
   .home {
     background-color: #f0f2f5;
-    // background-color: #010a2a;
+    // background-color: #BBDEFB;
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
     .left {
       flex: 0 0 18%;
       max-width: 280px;
-      background-color: #fff;
-      // background-color: #00104f;
+      background-color: @left-color;
       box-shadow: 4px 0 10px 0 rgba(0,0,0,0.1);
       .left-title {
-        // background: #87d068;
         box-sizing: border-box;
         border: solid 1px #03A9F4;
-        background-color: #fff;
-        // background-color: #00104f;
+        background-color: @header-color;
+        // background-color: #1976D2;;
         position: relative;
         display: flex;
         flex-flow: row nowrap;
@@ -220,6 +221,7 @@ export default {
         font: 28px/1 simhei serif;
         font-weight: 500;
         color: #0288D1;
+        // color: #FFF;
         // box-shadow: 4px 4px 10px 10px #0288D14d inset;
         button {
           outline: none;
@@ -249,12 +251,19 @@ export default {
         &::-webkit-scrollbar {
           width: 5px;
         }
+        &::-webkit-scrollbar-track {
+          width: 5px;
+          background-color: #BBDEFB9D;
+          border-radius: 3px;
+        }
         &::-webkit-scrollbar-thumb {
-          background-color: #03A9F46D;
+          background-color: #03A9F49D;
+          border-radius: 3px;
         }
         .user-item {
           box-sizing: border-box;
-          clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%); 
+          // clip-path: polygon(0 0, 10% 50%, 0 100%, 100% 100%, 100% 0); 
           width: 70%;
           height: 2.4em;
           text-align: center;
@@ -262,16 +271,18 @@ export default {
           font-weight: bold;
           // border-bottom-left-radius: 15px;
           // border-top-left-radius: 15px;
+          // border-radius: 5px;
           border-left: solid transparent 5px;
           color: #fff;
-          background-color: #ccc;
+          // background-color: #ccc;
+          background-color: #BBDEFB;
           margin: 20px auto;
           user-select: none;
           cursor: pointer;
           box-shadow: -2px 2px 4px 0 rgba(0,0,0,0.2);
           transition: transform .3s;
           &:hover {
-            // box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
+            box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
             transform: scale(1.1) translate3d(15px, 0px, 20px);
             border-left: solid #03A9F4 5px;
           }
@@ -351,8 +362,8 @@ export default {
       .header {
         box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1);
         height: 80px;
-        background: #fff;
-        // background-color: #00104f;
+        background-color: @header-color;
+        // background-color: #1976D2;
         position: relative;
         // border: solid 1px #03A9F4;
         border: none;
@@ -364,21 +375,21 @@ export default {
           left: 0;
           right: 0;
           margin: 0 auto;
-          background-color: #fff;
-          // background-color: #00104f;
+          background-color: @header-color;
+          // background-color: #1976D2;
           width: 400px;
           height: 140%;
           font: 45px sans-serif;
           text-align: center;
           font-weight: 600;
           color: #03A9F4;
-          // color: #51ebff;
+          // color: #fff;
           clip-path: polygon(0 0, 10% 100%, 90% 100%, 100% 0, 0 0);
           display: flex;
           justify-content: center;
           align-items: center;
-          border-top: solid 3px #03A9F4;
-          border-bottom: solid 6px #03A9F4;
+          // border-top: solid 3px #03A9F4;
+          // border-bottom: solid 6px #03A9F4;
           box-sizing: border-box;
         }
         .upload {
@@ -440,13 +451,19 @@ export default {
               box-sizing: border-box;
               padding: 20px 10px 10px 10px;
               background-color: #fff;
-              // background-color: #00104f;
+              // background-color: #BBDEFB;
               border: solid 1px #03A9F4;
               &::-webkit-scrollbar {
                 width: 5px;
               }
+              &::-webkit-scrollbar-track {
+                width: 5px;
+                background-color: #BBDEFB9D;
+                border-radius: 3px;
+              }
               &::-webkit-scrollbar-thumb {
-                background-color: #03A9F46D;
+                background-color: #03A9F49D;
+                border-radius: 3px;
               }
             }
           }
@@ -472,7 +489,7 @@ export default {
               flex: 1 1 auto;
               margin-top: 20px;
               background-color: #fff;
-              // background-color: #00104f;
+              // background-color: #BBDEFB;
               border: solid 1px #03A9F4;
               box-sizing: border-box;
               padding: 20px 15px 10px 25px;
@@ -481,8 +498,14 @@ export default {
               &::-webkit-scrollbar {
                 width: 5px;
               }
+              &::-webkit-scrollbar-track {
+                width: 5px;
+                background-color: #BBDEFB9D;
+                border-radius: 3px;
+              }
               &::-webkit-scrollbar-thumb {
-                background-color: #03A9F46D;
+                background-color: #03A9F49D;
+                border-radius: 3px;
               }
               .files-list {
                 overflow: auto;
