@@ -27,7 +27,16 @@ const directoryArray = [
     ]
   },
   { name: 'folder2', children: [] },
-  { name: 'folder3', children: [ { name: 'file1' } ] },
+  { name: 'folder3', children: [
+    { name: 'folder3-0'},
+    { name: 'folder3-1'},
+    { name: 'folder3-2'},
+    { name: 'folder3-3'},
+    { name: 'folder3-4'},
+    { name: 'folder3-5'},
+    { name: 'folder3-6'},
+    { name: 'folder3-7'},
+  ] },
   { name: 'folder4', isFolder: true },
 ]
 

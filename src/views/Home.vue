@@ -29,7 +29,7 @@
     <div class="container">
       <div class="header">
         <div class="current-user"><div class="username">{{this.selectedUser && this.selectedUser.name || '未选择用户'}}</div></div>
-        <button :disabled="!(selectedTreeItem&&selectedUser)" class="upload" :class="{active: selectedTreeItem&&selectedUser}" @click="upload"></button>
+        <button :disabled="!(selectedTreeItem&&selectedUser)" class="upload" :class="{active: (selectedTreeItem||selectedFile)&&selectedUser}" @click="upload"></button>
       </div>
       <div class="body">
         <div class="toolbar"></div>
@@ -45,7 +45,11 @@
             <div class="right-title">文件列表</div>
             <div class="right-content border-style">
               <div class="files-list">
-                <div class="list-item"></div>
+                <div class="list-item" v-for="(item, index) in cSelectedTreeItem" 
+                  :key="index" @click="handleOnFileSelect(item, $event)">
+                  <img class="file-icon" src="../assets/images/file.svg" alt="file-icon">
+                  <div class="file-name">{{item.name}}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -71,15 +75,53 @@ export default {
       users,
       selectedUser: null,
       selectedTreeItem: null,
+      selectedFile: null,
       isAddVisible: false,
       username: '',
       userModalPosition: {}
     }
   },
+  computed: {
+    cSelectedTreeItem () {
+      const children = this.selectedTreeItem && this.selectedTreeItem.children
+      return this.selectedTreeItem 
+        ? (children ? children : [this.selectedTreeItem])
+        : []
+    }
+  },
   mounted () {
     this.userItemsDOM = document.getElementsByClassName('user-item')
+    this.listItemsDOM = document.getElementsByClassName('list-item')
+    this.fetchUserData ()
   },
   methods: {
+    fetchUserData () {
+      this.$http.get('users')
+        .then(res => {
+
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    fetchFolders () {
+      this.$http.get('folders')
+        .then(res => {
+
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    fetchFilesByFolderId () {
+      this.$http.get('files')
+        .then(res => {
+
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
     addUser (event) {
       this.userModalPosition.left = event.clientX + 'px'
       this.userModalPosition.top = event.clientY + 'px'
@@ -89,6 +131,13 @@ export default {
     addUserOk () {
       this.isAddVisible = false
       this.users.push({ name: this.username })
+      this.http.post('addUser', {} )
+        .then(res => {
+
+        })
+        .catch(err => {
+          console.error(err)
+        })
     },
     addUserCancel () {
       this.isAddVisible = false
@@ -97,6 +146,10 @@ export default {
     deleteUser () {
       const delIndex = this.users.indexOf(this.selectedUser)
       this.users.splice(delIndex, 1)
+      this.$http.post('deleteUser', {})
+        .then(res => {
+
+        })
     },
     handleOnTreeSelect (item) {
       console.log('item: ', item)
@@ -113,9 +166,25 @@ export default {
           // debugger
           userItem.classList.add('selected')
         } else {
-          userItem.classList.remove('selected', true)
+          userItem.classList.remove('selected')
         }
       }
+    },
+    handleOnFileSelect (file, event) {
+      var fileItemDOM = event.currentTarget
+      // debugger
+      this.selectedFile = file
+      for (let itemDOM of this.listItemsDOM) {
+        if (itemDOM == fileItemDOM) {
+          if (itemDOM.classList.contains('selected')) {
+            this.selectedFile = null
+          }
+          itemDOM.classList.toggle('selected')
+        } else {
+          itemDOM.classList.remove('selected')
+        }
+      }
+      console.log('selectedFile:', this.selectedFile)
     }
   }
 }
@@ -178,6 +247,12 @@ export default {
       .user-list { 
         overflow-y: auto;
         height: calc(100% - 80px);
+        &::-webkit-scrollbar {
+          width: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: #03A9F46D;
+        }
         .user-item {
           box-sizing: border-box;
           clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
@@ -370,9 +445,16 @@ export default {
               font: 23px/1.5 sans-serif;
               color: #707070;
               margin-top: 20px;
-              padding: 10px;
+              box-sizing: border-box;
+              padding: 20px 10px 10px 10px;
               background-color: #fff;
               border: solid 1px #03A9F4;
+              &::-webkit-scrollbar {
+                width: 5px;
+              }
+              &::-webkit-scrollbar-thumb {
+                background-color: #03A9F46D;
+              }
             }
           }
           .files-right {
@@ -391,13 +473,46 @@ export default {
               text-shadow: 0.1em 0.1em 0.2em #03A9F4AA;
             }
             .right-content {
-              position: relative;
               overflow: auto;
               flex: 1 1 auto;
               margin-top: 20px;
-              padding: 10px;
               background-color: #fff;
               border: solid 1px #03A9F4;
+              box-sizing: border-box;
+              padding: 20px 15px 10px 25px;
+              font: 23px/1.5 sans-serif;
+              color: #707070;
+              &::-webkit-scrollbar {
+                width: 5px;
+              }
+              &::-webkit-scrollbar-thumb {
+                background-color: #03A9F46D;
+              }
+              .files-list {
+                overflow: auto;
+                .list-item {
+                  display: flex;
+                  flex-flow: row nowrap;
+                  align-items: center;
+                  padding: 3px;
+                  box-sizing: border-box;
+                  border-bottom: 1px dashed #03A9F4;
+                  cursor: pointer;
+                  &.selected {
+                    background-color: #e0e0e0;
+                  }
+                  .file-icon {
+                    flex: 0 0 auto;
+                    display: block;
+                    width: 1.1em;
+                    height: 1.1em;
+                    margin-right: 5px;
+                  }
+                  .file-name {
+                    flex: 1 1 auto;
+                  }
+                }
+              }
             }
           }
         }
