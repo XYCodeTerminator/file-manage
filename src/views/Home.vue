@@ -10,8 +10,6 @@
       <div class="user-list">
         <div v-for="(user, i) in users" :key="i" 
           class="user-item" @click="handleOnUserSelect(user, $event)">
-          <!-- <img class="user-icon" src="../assets/images/user.svg" alt="user-icon"> -->
-          <!-- <div class="username">{{user.name}}</div> -->
           {{user.name}}
         </div>
       </div>
@@ -193,7 +191,7 @@ export default {
 <style lang="less" scoped>
   .home {
     background-color: #f0f2f5;
-    // background-color: #00071a;
+    // background-color: #010a2a;
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -208,6 +206,7 @@ export default {
         box-sizing: border-box;
         border: solid 1px #03A9F4;
         background-color: #fff;
+        // background-color: #00104f;
         position: relative;
         display: flex;
         flex-flow: row nowrap;
@@ -269,21 +268,8 @@ export default {
           margin: 20px auto;
           user-select: none;
           cursor: pointer;
-          // box-shadow: -2px 2px 4px 0 rgba(0,0,0,0.2);
+          box-shadow: -2px 2px 4px 0 rgba(0,0,0,0.2);
           transition: transform .3s;
-          // display: flex;
-          // flex-flow: row nowrap;
-          // justify-content: flex-start;
-          // align-items: center;
-          // .user-icon {
-          //   width: 1em;
-          //   height: 1em;
-          //   flex: 0 0 auto;
-          //   display: block;
-          // }
-          // .username {
-          //   flex: 1 1 auto;
-          // }
           &:hover {
             // box-shadow: -6px 6px 8px 0 rgba(0,0,0,0.2);
             transform: scale(1.1) translate3d(15px, 0px, 20px);
@@ -379,12 +365,14 @@ export default {
           right: 0;
           margin: 0 auto;
           background-color: #fff;
+          // background-color: #00104f;
           width: 400px;
           height: 140%;
           font: 45px sans-serif;
           text-align: center;
           font-weight: 600;
           color: #03A9F4;
+          // color: #51ebff;
           clip-path: polygon(0 0, 10% 100%, 90% 100%, 100% 0, 0 0);
           display: flex;
           justify-content: center;
@@ -430,11 +418,14 @@ export default {
             flex-flow: column nowrap;
             .left-title {
               flex: 0 0 auto;
-              width: 100%;
+              align-self: flex-end;
+              width: 70%;
+              // box-sizing: border-box;
               padding: 5px;
-              margin: 0 auto;
-              text-align: center;
+              // margin: 0 auto;
+              text-align: left;
               color: #03A9F4;
+              // color: #51ebff;
               font: 26px/1 simhei serif;
               text-shadow: 0.1em 0.1em 0.2em #03A9F4AA;
             }
@@ -444,10 +435,12 @@ export default {
               overflow: auto;
               font: 23px/1.5 sans-serif;
               color: #707070;
+              // color: #51ebff;
               margin-top: 20px;
               box-sizing: border-box;
               padding: 20px 10px 10px 10px;
               background-color: #fff;
+              // background-color: #00104f;
               border: solid 1px #03A9F4;
               &::-webkit-scrollbar {
                 width: 5px;
@@ -467,8 +460,10 @@ export default {
               position: relative;
               padding: 5px;
               color: #03A9F4;
-              margin: 0 auto;
-              text-align: center;
+              // color: #51ebff;
+              // margin: 0 auto;
+              width: 70%;
+              text-align: right;
               font: 26px/1 simhei serif;
               text-shadow: 0.1em 0.1em 0.2em #03A9F4AA;
             }
@@ -477,6 +472,7 @@ export default {
               flex: 1 1 auto;
               margin-top: 20px;
               background-color: #fff;
+              // background-color: #00104f;
               border: solid 1px #03A9F4;
               box-sizing: border-box;
               padding: 20px 15px 10px 25px;
