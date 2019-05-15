@@ -17,7 +17,7 @@
         <div class="modal-content">
           <div class="btn-close" @click="addUserCancel">&times;</div>
           <div class="modal-title">添加用户</div>
-          <input v-model="username" placeholder="请输入用户名" type="text">
+          <input @keyup.enter="addUserOk" v-model="username" placeholder="请输入用户名" type="text">
           <div class="btn-ok" @click="addUserOk">确认</div>
           <div class="btn-cancel" @click="addUserCancel">取消</div>
         </div>
@@ -154,7 +154,7 @@ export default {
       this.selectedTreeItem = item
     },
     upload () {
-      alert('上传')
+      console.log("上传：", this.selectedFile || this.selectedTreeItem)
     },
     handleOnUserSelect (user, event) {
       this.selectedUser = user
@@ -192,6 +192,7 @@ export default {
   @bg-color: #f0f2f5;
   @header-color: #fff;
   @left-color: #fff;
+  @main-color: #03A9F4;
   .home {
     background-color: #f0f2f5;
     // background-color: #BBDEFB;

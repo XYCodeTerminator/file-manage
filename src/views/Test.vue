@@ -7,15 +7,17 @@
     <!-- <svg width="96" height="96">
       <use xlink:href="../assets/images/upload_disable.svg" width="96" height="96" />
     </svg> -->
-    <x-modal :isVisible="true" :position="{left: '100px', top: '200px'}">
+    <!-- <x-modal :isVisible="true" :position="{left: '100px', top: '200px'}">
       <div>aaa</div>
-    </x-modal>
+    </x-modal> -->
+    <XMessage />
   </div>
 </template>
 
 <script>
 import XTreeView from '@/components/XTree'
 import XModal from '@/components/XModal'
+import XMessage from '@/components/XMessage/XMessage'
 var treeArray = [
   { name: 'file0' },
   { name: 'file1' },
@@ -58,7 +60,8 @@ export default {
   },
   components: {
     XTreeView,
-    XModal
+    XModal,
+    XMessage
   },
   methods: {
   	makeFolder: function (item) {
