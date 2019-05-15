@@ -10,7 +10,8 @@
     <!-- <x-modal :isVisible="true" :position="{left: '100px', top: '200px'}">
       <div>aaa</div>
     </x-modal> -->
-    <XMessage />
+    <!-- <XMessage /> -->
+    <button @click="showMsg">showMessage</button>
   </div>
 </template>
 
@@ -71,6 +72,14 @@ export default {
     addItem: function (item) {
     	item.children.push({
         name: 'new stuff'
+      })
+    },
+    showMsg () {
+      this.$XMessage({
+        duration: 1500,
+        hasClose: true,
+        type: 'error',
+        content: '测试测试测试'
       })
     }
   }

@@ -1,8 +1,8 @@
 <template>
-  <div class="message" :class="`message-${type}`" v-if="isVisible">
-    <img class="icon" :src="require(`./assets/images/msg_${type}.svg`)" alt="msg-icon">
-    <div class="content">{{content}}</div>
-    <div v-if="hasClose" class="close-btn" @click="isVisible = false">&times;</div>
+  <div class="message" :class="`message-${message.type}`" v-if="message.isVisible">
+    <img class="icon" :src="require(`./assets/images/msg_${message.type}.svg`)" alt="msg-icon">
+    <div class="content">{{message.content}}</div>
+    <div v-if="message.hasClose" class="close-btn" @click="message.isVisible = false">&times;</div>
   </div>
 </template>
 
@@ -11,10 +11,12 @@ export default {
   name: "XMessage",
   data () {
     return {
-      type: 'error', // info success warning error 
-      content: '错误提示！！！',
-      hasClose: true,
-      isVisible: true
+      message: {
+        type: 'info', // info success warning error 
+        content: '',
+        hasClose: false,
+        isVisible: false
+      }
     }
   }
 }
@@ -22,7 +24,12 @@ export default {
 
 <style lang="less" scoped>
   .message {
-    position: relative;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
     display: flex;
     flex-flow: row nowrap;
     // justify-content: center;
