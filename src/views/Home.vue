@@ -35,7 +35,7 @@
           <div class="files-left">
             <div class="left-title">文件夹</div>
             <div class="left-content border-style">
-              <x-tree-view :treeArray="directoryArray" 
+              <x-tree-view ref="treeView" :treeArray="directoryArray" 
                 :isOpenAll="true" @select="handleOnTreeSelect" />
             </div>
           </div>
@@ -155,6 +155,15 @@ export default {
     },
     upload () {
       console.log("上传：", this.selectedFile || this.selectedTreeItem)
+      this.$XMessage({
+        type: 'success',
+        hasClose: true,
+        content: ' 上传成功！！',
+        duration: 5000
+      })
+      this.selectedFile = null
+      this.selectedTreeItem = null
+      this.$refs.treeView.resetChecked()
     },
     handleOnUserSelect (user, event) {
       this.selectedUser = user

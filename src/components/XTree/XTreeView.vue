@@ -47,6 +47,15 @@ export default {
     select (item) {
       // console.log('XTreeView:', item)
       this.$emit('select', item)
+    },
+    resetChecked () {
+      if (this.$refs.treeItem.length > 0) {
+        this.$refs.treeItem.forEach(treeItem => {
+          treeItem.resetChecked()
+        })
+      } else {
+        this.$refs.treeItem.resetChecked()
+      }
     }
   }
 }

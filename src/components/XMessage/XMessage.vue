@@ -1,9 +1,12 @@
 <template>
-  <div class="message" :class="`message-${message.type}`" v-if="message.isVisible">
-    <img class="icon" :src="require(`./assets/images/msg_${message.type}.svg`)" alt="msg-icon">
-    <div class="content">{{message.content}}</div>
-    <div v-if="message.hasClose" class="close-btn" @click="message.isVisible = false">&times;</div>
-  </div>
+  <transition name="fade">
+    <div class="message" :class="`message-${message.type}`" v-if="message.isVisible">
+      <img class="icon" :src="require(`./assets/images/msg_${message.type}.svg`)" alt="msg-icon">
+      <div class="content">{{message.content}}</div>
+      <div v-if="message.hasClose" class="close-btn" @click="message.isVisible = false">&times;</div>
+    </div>
+  </transition>
+  
 </template>
 
 <script>
@@ -27,8 +30,8 @@ export default {
     position: fixed;
     left: 0;
     right: 0;
-    top: 0;
-    bottom: 0;
+    top: 36px;
+    bottom: 0 auto;
     margin: auto;
     display: flex;
     flex-flow: row nowrap;
@@ -77,6 +80,12 @@ export default {
         color: #ccc;
       }
     }
+  }
+  .fade-enter-active,.fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter,.fade-leave-to {
+    opacity: 0;
   }
 </style>
 

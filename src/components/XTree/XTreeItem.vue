@@ -97,6 +97,12 @@ export default {
       // this.isOpen = !this.isOpen
       this.$emit('select', this.selected)
     },
+    resetChecked () {
+      this.selected = null
+      for (let itemContentDOM of this.treeItemContentDOMS) {
+        itemContentDOM.classList.remove('selected')
+      }
+    },
     select (item) {
       this.$emit('select', item)
     }
