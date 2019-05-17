@@ -159,7 +159,7 @@ export default {
         type: 'success',
         hasClose: true,
         content: ' 上传成功！！',
-        duration: 5000
+        duration: 2000
       })
       this.selectedFile = null
       this.selectedTreeItem = null

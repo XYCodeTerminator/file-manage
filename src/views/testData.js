@@ -1,13 +1,15 @@
 const directoryArray = [
   {
+    id: '',
     name: 'folder0',
     children: [
       {
+        id: '',
         name: 'folder0-1',
         isOpen: true,
         children: [
-          { name: 'folder0-1-0', children: [] },
-          { name: 'folder0-1-1', children: [] }
+          { id: '', name: 'folder0-1-0', children: [] },
+          { id: '', name: 'folder0-1-1', children: [] }
         ]
       },
       {
