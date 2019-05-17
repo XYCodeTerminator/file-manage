@@ -27,7 +27,7 @@
     <div class="container">
       <div class="header">
         <div class="current-user"><div class="username">{{this.selectedUser && this.selectedUser.name || '未选择用户'}}</div></div>
-        <button :disabled="!(selectedTreeItem&&selectedUser)" class="upload" :class="{active: (selectedTreeItem||selectedFile)&&selectedUser}" @click="upload"></button>
+        <button :disabled="!(selectedTreeItem&&selectedUser)" class="upload" :class="{active: selectedFile&&selectedUser}" @click="upload"></button>
       </div>
       <div class="body">
         <div class="toolbar"></div>
@@ -42,11 +42,11 @@
           <div class="files-right">
             <div class="right-title">文件列表</div>
             <div class="right-content border-style">
-              <div class="files-list">
-                <div class="list-item" v-for="(item, index) in cSelectedTreeItem" 
+              <div class="files-list" v-if="selectedTreeItem && selectedTreeItem.Files">
+                <div class="list-item" v-for="(item, index) in selectedTreeItem.Files" 
                   :key="index" @click="handleOnFileSelect(item, $event)">
                   <img class="file-icon" src="../assets/images/file.svg" alt="file-icon">
-                  <div class="file-name">{{item.name}}</div>
+                  <div class="file-name">{{item.Name}}</div>
                 </div>
               </div>
             </div>
@@ -80,15 +80,14 @@ export default {
     }
   },
   computed: {
-    cSelectedTreeItem () {
-      const children = this.selectedTreeItem && this.selectedTreeItem.children
-      return this.selectedTreeItem 
-        ? (children ? children : [this.selectedTreeItem])
-        : []
-    }
+    // cSelectedTreeItem () {
+    //   const children = this.selectedTreeItem && this.selectedTreeItem.children
+    //   return this.selectedTreeItem 
+    //     ? (children ? children : [this.selectedTreeItem])
+    //     : []
+    // }
   },
   mounted () {
-    debugger
     this.userItemsDOM = document.getElementsByClassName('user-item')
     this.listItemsDOM = document.getElementsByClassName('list-item')
     this.fetchUserData ()
@@ -112,15 +111,15 @@ export default {
           console.error(err)
         })
     },
-    fetchFilesByFolderId () {
-      this.$http.get('files')
-        .then(res => {
+    // fetchFilesByFolderId () {
+    //   this.$http.get('files')
+    //     .then(res => {
 
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    },
+    //     })
+    //     .catch(err => {
+    //       console.error(err)
+    //     })
+    // },
     addUser (event) {
       this.userModalPosition.left = event.clientX + 'px'
       this.userModalPosition.top = event.clientY + 'px'
@@ -150,12 +149,8 @@ export default {
 
         })
     },
-    handleOnTreeSelect (item) {
-      console.log('item: ', item)
-      this.selectedTreeItem = item
-    },
     upload () {
-      console.log("上传：", this.selectedFile || this.selectedTreeItem)
+      console.log("上传：", this.selectedFile.FullName)
       this.$XMessage({
         type: 'success',
         hasClose: true,
@@ -178,6 +173,10 @@ export default {
         }
       }
     },
+    handleOnTreeSelect (item) {
+      // console.log('item: ', item)
+      this.selectedTreeItem = item
+    },
     handleOnFileSelect (file, event) {
       var fileItemDOM = event.currentTarget
       // debugger
@@ -192,7 +191,7 @@ export default {
           itemDOM.classList.remove('selected')
         }
       }
-      console.log('selectedFile:', this.selectedFile)
+      // console.log('selectedFile:', this.selectedFile)
     }
   }
 }

@@ -7,8 +7,8 @@
     >
       <div class="left-icon" @click="toggle"
         :class="{
-          arrow: isFolder&&hasChildren, 
-          'arrow-down': isOpen&&hasChildren
+          arrow: isFolder&&hasFolders, 
+          'arrow-down': isOpen&&hasFolders
         }"
       >
         <img 
@@ -53,15 +53,15 @@ export default {
   },
   computed: {
     isFolder () {
-      // return this.item.children && this.item.children.length > 0
-      return this.item.children || this.item.isFolder
+      // return this.item.Folders && this.item.Folders.length > 0
+      return this.item.Folders || this.item.isFolder
     },
-    hasChildren () {
-      return this.item.children && this.item.children.length > 0
+    hasFolders () {
+      return this.item.Folders && this.item.Folders.length > 0
     },
     cIcon () {
       return this.isFolder 
-        ? (this.isOpen && this.hasChildren ? require('./assets/images/folder_open.svg') : require('./assets/images/folder_close.svg'))
+        ? (this.isOpen && this.hasFolders ? require('./assets/images/folder_open.svg') : require('./assets/images/folder_close.svg'))
         : this.icon
     }
   },
@@ -80,8 +80,8 @@ export default {
           // debugger
           /**
            * :class="{
-           *   arrow: isFolder&&hasChildren, 
-           *   'arrow-down': isOpen&&hasChildren
+           *   arrow: isFolder&&hasFolders, 
+           *   'arrow-down': isOpen&&hasFolders
            * }" 会覆盖 selected 样式
            */
           if (itemContentDOM.classList.contains('selected')) {
