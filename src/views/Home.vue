@@ -448,6 +448,7 @@ export default {
               color: #03A9F4;
               // color: #51ebff;
               font: 26px/1 simhei serif;
+              font-weight: bold;
               text-shadow: 0.1em 0.1em 0.2em #03A9F4AA;
             }
             .left-content {
@@ -492,6 +493,7 @@ export default {
               width: 70%;
               text-align: right;
               font: 26px/1 simhei serif;
+              font-weight: bold;
               text-shadow: 0.1em 0.1em 0.2em #03A9F4AA;
             }
             .right-content {
