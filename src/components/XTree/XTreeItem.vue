@@ -16,12 +16,12 @@
           class="icon-img" :src="cIcon" 
           alt="tree-icon" >
       </div>
-      <span class="txt">{{item.name}}</span>
+      <span class="txt">{{item.Name}}</span>
     </div>
     <XTreeView 
       v-if="isFolder" v-show="isOpen" 
       :isOpenAll="isOpenAll"
-      :treeArray="item.children"
+      :treeArray="item.Folders"
       @select="select" />
   </div>
 </template>

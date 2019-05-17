@@ -1,45 +1,105 @@
 const directoryArray = [
   {
-    id: '',
-    name: 'folder0',
-    children: [
-      {
-        id: '',
-        name: 'folder0-1',
-        isOpen: true,
-        children: [
-          { id: '', name: 'folder0-1-0', children: [] },
-          { id: '', name: 'folder0-1-1', children: [] }
-        ]
-      },
-      {
-        name: 'folder0-2',
-        children: [
-          { name: 'folder0-2-0', children: [] },
-          { name: 'folder0-2-1', children: [] }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'folder1',
-    children: [
-      { name: 'folder1-0', children: [] },
-      { name: 'folder1-1', children: [] }
-    ]
-  },
-  { name: 'folder2', children: [] },
-  { name: 'folder3', children: [
-    { name: 'folder3-0'},
-    { name: 'folder3-1'},
-    { name: 'folder3-2'},
-    { name: 'folder3-3'},
-    { name: 'folder3-4'},
-    { name: 'folder3-5'},
-    { name: 'folder3-6'},
-    { name: 'folder3-7'},
-  ] },
-  { name: 'folder4', isFolder: true },
+    "Name": "UDISK PRO",
+    "FullPath": "/media/selinplus/UDISK PRO",
+    "Files": [{
+      "Name": "flutter-webrtc-demo.zip",
+      "FullName": "/media/selinplus/UDISK PRO/flutter-webrtc-demo.zip"
+    }, {
+      "Name": "ytgs_task.zip",
+      "FullName": "/media/selinplus/UDISK PRO/ytgs_task.zip"
+    }, {
+      "Name": "《2018年度考核登记表》（李金光）..631.doc",
+      "FullName": "/media/selinplus/UDISK PRO/《2018年度考核登记表》（李金光）..631.doc"
+    }],
+    "Folders": [{
+      "Name": "aaa",
+      "FullPath": "/media/selinplus/UDISK PRO/aaa",
+      "Files": [],
+      "Folders": []
+    }, {
+      "Name": "ddd",
+      "FullPath": "/media/selinplus/UDISK PRO/ddd",
+      "Files": [],
+      "Folders": [{
+        "Name": "dddff",
+        "FullPath": "/media/selinplus/UDISK PRO/ddd/dddff",
+        "Files": [],
+        "Folders": [{
+          "Name": "hh",
+          "FullPath": "/media/selinplus/UDISK PRO/ddd/dddff/hh",
+          "Files": [],
+          "Folders": [{
+            "Name": "hhhgf",
+            "FullPath": "/media/selinplus/UDISK PRO/ddd/dddff/hh/hhhgf",
+            "Files": [],
+            "Folders": [{
+              "Name": "666",
+              "FullPath": "/media/selinplus/UDISK PRO/ddd/dddff/hh/hhhgf/666",
+              "Files": [],
+              "Folders": []
+            }]
+          }]
+        }]
+      }]
+    }, {
+      "Name": "fffff",
+      "FullPath": "/media/selinplus/UDISK PRO/fffff",
+      "Files": [],
+      "Folders": [{
+        "Name": "1111",
+        "FullPath": "/media/selinplus/UDISK PRO/fffff/1111",
+        "Files": [],
+        "Folders": [{
+          "Name": "2222",
+          "FullPath": "/media/selinplus/UDISK PRO/fffff/1111/2222",
+          "Files": [],
+          "Folders": [{
+            "Name": "333",
+            "FullPath": "/media/selinplus/UDISK PRO/fffff/1111/2222/333",
+            "Files": [],
+            "Folders": [{
+              "Name": "555",
+              "FullPath": "/media/selinplus/UDISK PRO/fffff/1111/2222/333/555",
+              "Files": [],
+              "Folders": []
+            }]
+          }]
+        }]
+      }]
+    }, {
+      "Name": "sss",
+      "FullPath": "/media/selinplus/UDISK PRO/sss",
+      "Files": [],
+      "Folders": []
+    }, {
+      "Name": "test1",
+      "FullPath": "/media/selinplus/UDISK PRO/test1",
+      "Files": [],
+      "Folders": [{
+        "Name": "test11",
+        "FullPath": "/media/selinplus/UDISK PRO/test1/test11",
+        "Files": [],
+        "Folders": []
+      }]
+    }, {
+      "Name": "test2",
+      "FullPath": "/media/selinplus/UDISK PRO/test2",
+      "Files": [{
+        "Name": "ceee.xlsx",
+        "FullName": "/media/selinplus/UDISK PRO/test2/ceee.xlsx"
+      }, {
+        "Name": "测试文档.docx",
+        "FullName": "/media/selinplus/UDISK PRO/test2/测试文档.docx"
+      }],
+      "Folders": []
+    }, {
+      "Name": "test3",
+      "FullPath": "/media/selinplus/UDISK PRO/test3",
+      "Files": [],
+      "Folders": []
+    }]
+  }
 ]
 
 const fileArray = [

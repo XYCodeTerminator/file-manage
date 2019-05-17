@@ -88,6 +88,7 @@ export default {
     }
   },
   mounted () {
+    debugger
     this.userItemsDOM = document.getElementsByClassName('user-item')
     this.listItemsDOM = document.getElementsByClassName('list-item')
     this.fetchUserData ()
